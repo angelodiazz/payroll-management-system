@@ -1,0 +1,3 @@
+C:/Users/angel/CLionProjects/COP 3003/Project/backend/cmake-build-debug/CMakeFiles/Project.dir
+C:/Users/angel/CLionProjects/COP 3003/Project/backend/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/angel/CLionProjects/COP 3003/Project/backend/cmake-build-debug/CMakeFiles/rebuild_cache.dir
