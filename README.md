@@ -15,7 +15,7 @@ This project was built to practice real-world C++ concepts and to serve as a por
 
 ---
 
-## 📂 Project Structure
+## 📂 Project Structure Overview
 
 
 
