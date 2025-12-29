@@ -2,7 +2,6 @@
 
 A C++ payroll management application demonstrating object-oriented programming principles and modular project design, with a Qt-based graphical user interface.
 
-This project was built to practice real-world C++ concepts and to serve as a portfolio project for software engineering internships.
 
 ---
 
