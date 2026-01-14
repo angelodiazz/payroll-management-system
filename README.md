@@ -61,7 +61,6 @@ cmake --build build_gui
 ```
 
 ### Option 2: Console Backend
-Ensure you have **Qt 6** and **CMake** installed.
 
 ```bash
 # Configure the Console project
