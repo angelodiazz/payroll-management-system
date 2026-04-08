@@ -1,3 +1,6 @@
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/12399/badge)](https://www.bestpractices.dev/projects/12399)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/angelodiazz/Payroll-Management-System/badge)](https://securityscorecards.dev/viewer/?uri=github.com/angelodiazz/Payroll-Management-System)
+
 # Payroll Management System (C++ / Qt6)
 
 An enterprise-grade payroll processing engine featuring a dual-interface architecture (Qt GUI + Console CLI) and a polymorphic calculation core. This project demonstrates advanced Object-Oriented Design patterns, including **Multiple Inheritance**, **Abstract Base Classes**, and **Functional Template Logic**.
