@@ -1,5 +1,5 @@
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/12399/badge)](https://www.bestpractices.dev/projects/12399)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/angelodiazz/Payroll-Management-System/badge)](https://securityscorecards.dev/viewer/?uri=github.com/angelodiazz/Payroll-Management-System)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/angelodiazz/payroll-management-system/badge)](https://securityscorecards.dev/viewer/?uri=github.com/angelodiazz/payroll-management-system)
 
 # Payroll Management System (C++ / Qt6)
 
