@@ -1,76 +1,125 @@
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/12399/badge)](https://www.bestpractices.dev/projects/12399)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/angelodiazz/payroll-management-system/badge)](https://securityscorecards.dev/viewer/?uri=github.com/angelodiazz/payroll-management-system)
 
-# Payroll Management System (C++ / Qt6)
+# Payroll Management System
 
-An enterprise-grade payroll processing engine featuring a dual-interface architecture (Qt GUI + Console CLI) and a polymorphic calculation core. This project demonstrates advanced Object-Oriented Design patterns, including **Multiple Inheritance**, **Abstract Base Classes**, and **Functional Template Logic**.
+A C++17 payroll application with a shared business-logic design used by both a Qt graphical interface and a console interface.
 
----
+The project was created to practice object-oriented programming, runtime polymorphism, templates, lambda expressions, validation, exception handling, and separation between application logic and presentation.
 
-## 🚀 Key Engineering Features
-* **Polymorphic Logic Engine**: Architected a scalable class hierarchy (`AbstractEmployee` → `PaidEmployee` → `Hourly`/`Salaried`) utilizing **pure virtual functions** to enforce contract compliance for pay calculation across disparate employee types.
-* **Dual-Head Architecture**: Decoupled the business logic (`PayrollSystem`) from the presentation layer, enabling the same C++ backend to power both a rich **Qt6 Desktop GUI** and a lightweight **Console CLI** without code duplication.
-* **Functional Template Integration**: Implemented a generic `total<Func>` template method using **Lambda expressions** to perform arbitrary aggregations (Gross vs. Net pay) dynamically at runtime, reducing boilerplate iteration logic.
-* **Robust Error Handling**: Integrated a custom exception hierarchy (`InvalidEmployeeException`) to enforce business rules (e.g., non-negative hours, duplicate ID prevention) before state mutation occurs.
+## Features
 
----
+- Add and remove hourly and salaried employees
+- Prevent duplicate employee IDs
+- Calculate regular and overtime pay for hourly employees
+- Calculate monthly gross pay for salaried employees
+- Calculate tax and net pay
+- Display individual payroll records
+- Calculate total gross and net payroll values
+- Use the same employee and payroll concepts from graphical and console interfaces
 
-## 🛡 Security & Defensive Design
-* **Memory Management**: Utilized `std::vector` of pointers for polymorphic storage while implementing strict destructors to prevent memory leaks during employee removal and system shutdown.
-* **Input Validation**: Enforced strict bounds checking on tax rates (0-100%) and hours worked within the constructor logic, ensuring the system state remains valid regardless of UI input method.
-* **Interface Segregation**: Applied the **Interface Segregation Principle** by creating a pure abstract `Taxable` interface, allowing non-employee entities to potentially interact with the tax calculation module in future expansions.
+## Object Model
 
----
-
-## 🛠 Tech Stack
-| Category | Technologies |
-| :--- | :--- |
-| **Language** | C++17 |
-| **Frameworks** | Qt 6 (Widgets Module) |
-| **Design Patterns** | Strategy, Template Method, MVC (Model-View-Controller) |
-| **Build System** | CMake |
-
----
-
-## 📂 Project Structure
 ```text
-payroll-system/
-├── backend/                # Core Business Logic (Shared Library)
-│   ├── employee.h/cpp      # Polymorphic Employee Hierarchy
-│   ├── payrollsystem.h/cpp # System Controller & Aggregation Logic
-│   ├── taxable.h           # Pure Abstract Interface
-│   └── exceptions.h        # Custom Error Handling
-├── PayrollSystemQt1/       # Presentation Layer (GUI)
-│   ├── mainwindow.h/cpp    # Qt Widget Controller
-│   └── mainwindow.ui       # XML Layout Definition
-└── ui_console/             # Presentation Layer (CLI)
-    └── ui_console.h/cpp    # Text-based Interface
+AbstractEmployee
+└── PaidEmployee
+    ├── HourlyEmployee
+    └── SalariedEmployee
+
+Taxable
+├── HourlyEmployee
+└── SalariedEmployee
 ```
 
-## 🚀 Build & Run
+`AbstractEmployee` defines the common payroll interface through pure virtual functions.
 
-### Option 1: Qt GUI (Recommended)
-Ensure you have **Qt 6** and **CMake** installed.
+`HourlyEmployee` and `SalariedEmployee` implement their own gross-pay, tax, net-pay, and employee-type behavior.
 
-```bash
-# Configure the Qt project
-cmake -S PayrollSystemQt1 -B build_gui
+The `Taxable` interface provides a separate contract for employee types that expose a tax rate.
 
-# Build the GUI executable
-cmake --build build_gui
+## Payroll Calculations
 
-# Run
-./build_gui/PayrollSystemQt
+Hourly employees receive:
+
+- Regular pay for up to 40 hours
+- Overtime pay at 1.5 times the hourly rate for hours above 40
+
+Salaried employees receive monthly gross pay calculated from their annual salary.
+
+Tax and net-pay values are calculated separately for each employee type.
+
+## Generic Aggregation
+
+`PayrollSystem` includes a generic `total` function template that accepts a callable object.
+
+Gross-pay and net-pay totals reuse the same traversal logic through lambda expressions.
+
+## Interfaces
+
+### Qt Interface
+
+The Qt application provides a graphical desktop interface for interacting with the payroll models.
+
+### Console Interface
+
+The console application provides a text-based interface using the same employee and payroll concepts.
+
+## Technologies
+
+- C++17
+- Qt 6 Widgets
+- Standard Template Library
+- CMake
+- Object-oriented programming
+- Templates and lambda expressions
+- Exception handling
+
+## Project Structure
+
+```text
+payroll-management-system/
+├── backend/
+│   ├── main.cpp
+│   ├── employee.h
+│   ├── employee.cpp
+│   ├── payrollsystem.h
+│   ├── payrollsystem.cpp
+│   ├── taxable.h
+│   ├── exceptions.h
+│   ├── ui_console.h
+│   ├── ui_console.cpp
+│   └── CMakeLists.txt
+├── PayrollSystemQt1/
+│   ├── main.cpp
+│   ├── mainwindow.h
+│   ├── mainwindow.cpp
+│   ├── mainwindow.ui
+│   ├── employee.h
+│   ├── employee.cpp
+│   ├── payrollsystem.h
+│   ├── payrollsystem.cpp
+│   └── CMakeLists.txt
+└── README.md
 ```
 
-### Option 2: Console Backend
+## Build the Qt Application
+
+Requirements:
+
+- CMake 3.20 or newer
+- A C++17-compatible compiler
+- Qt 6 Widgets
 
 ```bash
-# Configure the Console project
-cmake -S backend -B build_console
+cmake -S PayrollSystemQt1 -B build/qt
+cmake --build build/qt
+./build/qt/PayrollSystemQt
+```
 
-# Build the CLI executable
-cmake --build build_console
+## Build the Console Application
 
-# Run
-./build_console/Project
+```bash
+cmake -S backend -B build/cli
+cmake --build build/cli
+./build/cli/payroll_cli
+```
