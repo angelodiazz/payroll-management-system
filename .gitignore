@@ -1,0 +1,23 @@
+# JetBrains IDE files
+.idea/
+**/.idea/
+*.iml
+
+# CLion and CMake build directories
+cmake-build-*/
+**/cmake-build-*/
+build/
+**/build/
+
+# Qt Creator local files
+.qtcreator/
+**/.qtcreator/
+*.user
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
